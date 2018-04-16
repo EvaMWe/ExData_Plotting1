@@ -32,7 +32,7 @@ df$Time <- format(strptime(df$Time, format = "%H:%M:%S"), format = "%H:%M:%S")
 df$weekday <- format(df$Date, "%a")
 
 
-par(mfcol = c(2,2), mar = c(3,6,4,4))
+par(mfcol = c(2,2))
 
 with(df, plot(seq(1:length(df$Date)),Global_active_power, type = "l", ylab = "Global Active Power (kilowatts)", xaxt="n", xlab = ""))
 axis(1, at = c(1, which(df$weekday == "Fri")[1],length(df$Date)), labels = c("Thu","Fri","Sat"))
