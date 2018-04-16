@@ -31,12 +31,15 @@ df$Date <- as.Date (df$Date,format = "%d/%m/%Y")
 df$Time <- format(strptime(df$Time, format = "%H:%M:%S"), format = "%H:%M:%S")
 df$weekday <- format(df$Date, "%a")
 
-png(file = "plot3.png")
+
 with(df, plot(seq(1:length(df$Date)),Sub_metering_1, ylab = "Energy sub metering",  xlab = "", type = "l", xaxt="n"))
 with(df, points(seq(1:length(df$Date)),Sub_metering_2,type = 'l', col = "red"))
 with(df, points(seq(1:length(df$Date)),Sub_metering_3,type = 'l', col = "blue"))
 axis(1, at = c(1, which(df$weekday == "Fri")[1],length(df$Date)), labels = c("Thu","Fri","Sat"))
 legend("topright", lty = 1, col = c("black", "red", "blue"), legend = c("Sub_metering_1", "Sub_metering_2", "Sub_metering_3"))
+
+dev.copy(png, file = 'plot3.png', width = 480, height = 480)
+
 dev.off()
 
 

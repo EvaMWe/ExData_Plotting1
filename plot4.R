@@ -31,7 +31,7 @@ df$Date <- as.Date (df$Date,format = "%d/%m/%Y")
 df$Time <- format(strptime(df$Time, format = "%H:%M:%S"), format = "%H:%M:%S")
 df$weekday <- format(df$Date, "%a")
 
-png(file = "plot4.png")
+
 par(mfcol = c(2,2), mar = c(3,6,4,4))
 
 with(df, plot(seq(1:length(df$Date)),Global_active_power, type = "l", ylab = "Global Active Power (kilowatts)", xaxt="n", xlab = ""))
@@ -49,24 +49,9 @@ axis(1, at = c(1, which(df$weekday == "Fri")[1],length(df$Date)), labels = c("Th
 with(df, plot(seq(1:length(df$Date)),Global_reactive_power, ylab = "Global_reactive_power",  xlab = "datetime", type = "l", xaxt="n"))
 axis(1, at = c(1, which(df$weekday == "Fri")[1],length(df$Date)), labels = c("Thu","Fri","Sat"))
 
+dev.copy(png, file = 'plot4.png', width = 480, height = 480)
 dev.off()
 
-par(mfcol = c(2,2), mar = c(3,6,4,4))
-
-with(df, plot(seq(1:length(df$Date)),Global_active_power, type = "l", ylab = "Global Active Power (kilowatts)", xaxt="n", xlab = ""))
-axis(1, at = c(1, which(df$weekday == "Fri")[1],length(df$Date)), labels = c("Thu","Fri","Sat"))
-
-with(df, plot(seq(1:length(df$Date)),Sub_metering_1, ylab = "Energy sub metering",  xlab = "", type = "l", xaxt="n"))
-with(df, points(seq(1:length(df$Date)),Sub_metering_2,type = 'l', col = "red"))
-with(df, points(seq(1:length(df$Date)),Sub_metering_3,type = 'l', col = "blue"))
-axis(1, at = c(1, which(df$weekday == "Fri")[1],length(df$Date)), labels = c("Thu","Fri","Sat"))
-legend("topright", lty = 1, col = c("black", "red", "blue"), legend = c("Sub_metering_1", "Sub_metering_2", "Sub_metering_3"))
-
-with(df, plot(seq(1:length(df$Date)),Voltage, ylab = "Voltage",  xlab = "datetime", type = "l", xaxt="n"))
-axis(1, at = c(1, which(df$weekday == "Fri")[1],length(df$Date)), labels = c("Thu","Fri","Sat"))
-
-with(df, plot(seq(1:length(df$Date)),Global_reactive_power, ylab = "Global_reactive_power",  xlab = "datetime", type = "l", xaxt="n"))
-axis(1, at = c(1, which(df$weekday == "Fri")[1],length(df$Date)), labels = c("Thu","Fri","Sat"))
 
 
 

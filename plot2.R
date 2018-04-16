@@ -31,12 +31,12 @@ df$Date <- as.Date (df$Date,format = "%d/%m/%Y")
 df$Time <- format(strptime(df$Time, format = "%H:%M:%S"), format = "%H:%M:%S")
 df$weekday <- format(df$Date, "%a")
 
-png(file = "plot2.png")
+
 with(df, plot(seq(1:length(df$Date)),Global_active_power, type = "l", ylab = "Global Active Power (kilowatts)", xaxt="n", xlab = ""))
 axis(1, at = c(1, which(df$weekday == "Fri")[1],length(df$Date)), labels = c("Thu","Fri","Sat"))
+
+dev.copy(png, file = 'plot2.png', width = 480, height = 480)
 dev.off()
-with(df, plot(seq(1:length(df$Date)),Global_active_power, type = "l", ylab = "Global Active Power (kilowatts)", xaxt="n", xlab = ""))
-axis(1, at = c(1, which(df$weekday == "Fri")[1],length(df$Date)), labels = c("Thu","Fri","Sat"))
 
 
 
